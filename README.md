@@ -2,7 +2,7 @@
 
 A Django RESTful API for managing personal tasks. Each user can register, log in using JWT, and manage their own tasks — including creating, updating, deleting, filtering by date or priority, and marking tasks as complete.
 
----
+<p>&nbsp;</p>
 
 ## Features:
 
@@ -14,7 +14,7 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 - Timestamps for created and updated tasks
 - API documentation with Swagger UI
 
----
+<p>&nbsp;</p>
 
 ## Endpoints:
 
@@ -46,7 +46,7 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 | GET    | `/swagger/`  | Swagger UI (interactive API docs)    | Public |
 
 
----
+<p>&nbsp;</p>
 
 ## Getting Started:
 
@@ -75,6 +75,7 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 - Open API Documentation:
     - Swagger UI: http://localhost:8000/swagger/
 
+<p>&nbsp;</p>
 
 ## How to Use the API:
 
@@ -157,7 +158,7 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
    PATCH http://localhost:8000/api/tasks/3/complete/
    ```
 
----
+<p>&nbsp;</p>
 
 ## Testing with Postman or Bruno:
 
@@ -165,16 +166,18 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 - Set Authorization: Bearer <your_token> in the header.
 - Test creating, listing, updating, deleting, and filtering tasks.
 
----
+<p>&nbsp;</p>
 
 ## Tech Stack: 
-● Python 3.13 +
-● Django 5 +
-● Django REST Framework
-● SimpleJWT for authentication
-● PostgreSQL for storage
-● drf-yasg for Swagger UI
+- Python 3.13 +
+- Django 5 +
+- Django REST Framework
+- SimpleJWT for authentication
+- PostgreSQL for storage
+- drf-yasg for Swagger UI
+
+
+<p>&nbsp;</p>
 
 ---
-
 Built with Django, Django REST Framework, JWT (via SimpleJWT), and PostgreSQL.
