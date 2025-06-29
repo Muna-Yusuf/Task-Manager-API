@@ -104,10 +104,10 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
       ```
     - Response:
     - ```json
-     {
+      {
         "access": "your_jwt_token_here",
         "refresh": "refresh_token_here"
-     }
+      }
       ```
 3. **Use Token for Authorization:**
    ```makefile
