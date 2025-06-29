@@ -6,13 +6,17 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 
 ## Features:
 
-- User registration and login with JWT authentication
-- Full CRUD operations on tasks (Create, Read, Update, Delete)
-- Each user only accesses their own tasks
-- Filter tasks by completion status, priority, and due date range
-- Mark tasks as completed with a dedicated endpoint
-- Timestamps for created and updated tasks
-- API documentation with Swagger UI
+- User registration and JWT-based login (`/api/register/` + `/api/token/`)
+- CRUD operations on tasks (Create, Read, Update, Delete)
+- Authenticated users only access their own tasks
+- Filter tasks by:
+  - Completion status (`completed=true`)
+  - Priority (`priority=high`)
+  - Due date range (`due_date_after`, `due_date_before`)
+- Mark tasks as completed (PATCH endpoint)
+- Timestamps: `created_at`, `updated_at`
+- Swagger UI for API documentation
+- Pagination and ordering support (`?page=2&ordering=due_date`)
 
 <p>&nbsp;</p>
 
@@ -23,21 +27,30 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 | Method | Endpoint            | Description               |
 |--------|---------------------|---------------------------|
 | POST   | `/api/register/`    | Register a new user       |
-| POST   | `/api/login/`       | Log in and get JWT token  |
+| POST   | `/api/token/`       | Get JWT access + refresh  |
 
 ### Task Endpoints (Protected):
 
-| Method | Endpoint                         | Description                     |
-|--------|----------------------------------|---------------------------------|
-| GET    | `/api/tasks/`                    | List all your tasks             |
-| POST   | `/api/tasks/`                    | Create a new task               |
-| GET    | `/api/tasks/<id>/`               | View a specific task            |
-| PUT    | `/api/tasks/<id>/`               | Update a task                   |
-| DELETE | `/api/tasks/<id>/`               | Delete a task                   |
-| PATCH  | `/api/tasks/<id>/complete/`      | Mark a task as completed        |
-| GET    | `/api/tasks/?completed=true`     | Filter by completed tasks       |
-| GET    | `/api/tasks/?priority=high`      | Filter by priority              |
-| GET    | `/api/tasks/?due_after=2025-06-01&due_before=2025-06-30` | Filter by due date range |
+| Method | Endpoint                            | Description                     |
+|--------|-------------------------------------|---------------------------------|
+| GET    | `/api/tasks/`                       | List all your tasks             |
+| POST   | `/api/tasks/`                       | Create a new task               |
+| GET    | `/api/tasks/{id}/`                  | View a specific task            |
+| PUT    | `/api/tasks/{id}/`                  | Update a task (all fields)      |
+| PATCH  | `/api/tasks/{id}/`                  | Partial update (some fields)    |
+| DELETE | `/api/tasks/{id}/`                  | Delete a task                   |
+| PATCH  | `/api/tasks/{id}/mark_complete/`    | Mark a task as completed        |
+
+
+### Filtering Examples
+
+| Query                                             | Description                      |
+|--------------------------------------------------|----------------------------------|
+| `/api/tasks/?completed=true`                     | Filter completed tasks           |
+| `/api/tasks/?priority=high`                      | Filter by high priority          |
+| `/api/tasks/?due_date_after=2025-06-01`          | Tasks due after June 1, 2025     |
+| `/api/tasks/?due_date_before=2025-07-01`         | Tasks due before July 1, 2025    |
+| `/api/tasks/?ordering=due_date&page=2`           | Sorted by due date, page 2       |
 
 ### Documentation:
 
@@ -94,12 +107,12 @@ A Django RESTful API for managing personal tasks. Each user can register, log in
 
 2. **Log In and Get Token:**
    ```http
-   POST http://localhost:8000/api/login/
+   POST /api/token/
    ```
    - Body:
    - ```json
      {
-        "email": "ali@example.com",
+        "email": "ali",
         "password": "yourpassword123*"
      }
       ```
